@@ -28,11 +28,12 @@ async function createCandy(data){
     rating,
     is_favorite,
     candy_image,
-    candy_type
+    candy_type,
+    candy_description
     } = data;
 
     try{
-        let result = await db.one("INSERT INTO candies (candy_name, price, rating, is_favorite, candy_image, candy_type) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *", [candy_name, price, rating, is_favorite, candy_image, candy_type]);
+        let result = await db.one("INSERT INTO candies (candy_name, price, rating, is_favorite, candy_image, candy_type, candy_description) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *", [candy_name, price, rating, is_favorite, candy_image, candy_type, candy_description]);
         return result;
     }
     catch(error){

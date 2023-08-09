@@ -4,7 +4,7 @@ const router = express.Router();
 
 const { getAllCandies, getOneCandy, createCandy, deleteCandy, updateCandy } = require('../queries/candies');
 
-const { checkName, checkIsBoolean, checkPrice, checkRating, validateURL } = require('../validations/validations');
+const { checkName, checkIsBoolean, validateURL } = require('../validations/validations');
 
 //ROUTES
 
@@ -36,7 +36,7 @@ router.get('/:id', async (req, res) => {
 });
 
 //CREATE - CREATE CANDY
-router.post('/', checkName, checkIsBoolean, checkPrice, checkRating, validateURL, async (req, res) => {
+router.post('/', checkName, checkIsBoolean, validateURL, async (req, res) => {
     let createdCandy = await createCandy(req.body);
 
     if(Object.keys(createdCandy).length === 0){
