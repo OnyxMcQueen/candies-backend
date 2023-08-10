@@ -16,26 +16,23 @@ const checkIsBoolean = (req, res, next) => {
     }
 }
 
-// const checkPrice = (req, res, next) => {
-//     if(!(typeof req.body.price === 'number' && Number.isFinite(req.body.price))){
-//         res.status(500).send("Price must be a number");
-//     }
-//     else{
-//         next();
-//     }
-// }
+const checkPrice = (req, res, next) => {
+  if (!isNaN(req.body.price)) {
+    next();
+  } else {
+    res.status(500).send("Price must be a valid number");
+  }
+};
 
-// const checkRating = (req, res, next) => {
-//     if(typeof req.body.rating !== "number"){
-//         res.status(500).send("The rating must be a number")
-//     }
-//     else if(req.body.rating < 0 || req.body.rating > 10){
-//         res.status(500).send("The rating must be a whole number between 0 and 10")
-//     }
-//     else{
-//         next();
-//     }
-// }
+const checkRating = (req, res, next) => {
+  const rating = req.body.rating;
+
+  if (!isNaN(rating) && rating >= 0 && rating <= 10) {
+    next();
+  } else {
+    res.status(500).send("The rating must be a number between 0 and 10");
+  }
+};
 
 const validateURL = (req, res, next) => {
     if (
@@ -53,5 +50,7 @@ const validateURL = (req, res, next) => {
 module.exports = {
     checkName,
     checkIsBoolean,
+    checkPrice,
+    checkRating,
     validateURL
 }
