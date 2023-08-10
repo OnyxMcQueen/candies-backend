@@ -3,6 +3,8 @@ CREATE DATABASE candies_dev;
 
 \c candies_dev;
 
+DROP TABLE IF EXISTS candies;
+
 CREATE TABLE candies (
 id SERIAL PRIMARY KEY,
 candy_name TEXT NOT NULL,
